@@ -9,6 +9,7 @@ import ctre
 from wpilib import Joystick
 from subsystems.drivetrain import DriveTrain as Drive
 from subsystems.grabber import Grabber
+from robotpy_ext.autonomous import AutonomousModeSelector
 
 
 class Robot(wpilib.IterativeRobot):
@@ -27,14 +28,13 @@ class Robot(wpilib.IterativeRobot):
         self.drive = Drive(self)
         self.cubeGrabber = Grabber(self)
 
-        # TODO:  see examples/pacgoat/robot.py
-        # we need Classes defining autonomous commands to call for Forward
-        # and Reverse
-        #self.autoChooser = wpilib.SendableChooser()
-        #self.autoChooser.addDefault("Forward", Forward(self))
-        #self.autoChooser.addObject("Reverse", Reverse(self))
-        #wpilib.SmartDashboard.putData("Auto Mode", self.autoChooser)        
-
+        #components to make available to autonomous
+        self.components = {
+            'drive': self.drive
+        }
+        #use name of the folder holding our autonomous modes and the name of 
+        #the object holding components for autonomous
+        self.automodes = AutonomousModeSelector('autonomous', self.components)
 
     def robotPeriodic(self):
         pass
@@ -55,13 +55,14 @@ class Robot(wpilib.IterativeRobot):
     def autonomousPeriodic(self):
         """This function is called periodically during autonomous."""
 
+        self.automodes.run()
         #nearswitch, scale, farswitch = list(self.fielddata)
 #         
 #         if nearswitch == 'R':
 #             self.drive.arcade(.5, .2)
 #         else:
 #             self.drive.arcade(.5, -.2)
-        pass
+
 
     def teleopInit(self):
         pass
@@ -92,7 +93,7 @@ class Robot(wpilib.IterativeRobot):
     def testPeriodic(self):
         wpilib.LiveWindow.setEnabled(True)
         pass
-
+    
 
 if __name__ == "__main__":
     wpilib.run(Robot)

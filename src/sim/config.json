@@ -4,9 +4,9 @@
   	    "w": 3,
   	    "h": 2.33,
             "start_positions": [
-	        {"x": 2, "y": 20, "angle": 0, "name": "lower"},
-	        {"x": 2, "y": 10, "angle": 0, "name": "middle"},
-	        {"x": 2, "y": 5, "angle": 0, "name": "top"}
+	        {"x": 2.2, "y": 5, "angle": 0, "name": "left"},
+	        {"x": 2.2, "y": 20, "angle": 0, "name": "middle"},
+	        {"x": 2.2, "y": 35, "angle": 0, "name": "right"}
 	    ]  
   	},
   	"field": {
