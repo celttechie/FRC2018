@@ -90,12 +90,12 @@ class DriveTrain(Subsystem):
 
         super().__init__()
 
-    def moveToPosition(self, position, side='left'):
+    def moveToPosition(self, position):
 
-        if side == 'left':
             self.driveLeftMaster.setSafetyEnabled(False)
+            self.driveRightMaster.setSafetyEnabled(False)
+            
             self.driveLeftMaster.set(ctre.talonsrx.TalonSRX.ControlMode.Position, position)
-        else:
             self.driveRightMaster.set(ctre.talonsrx.TalonSRX.ControlMode.Position, position)
 
     def stop(self):
